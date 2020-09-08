@@ -27,9 +27,8 @@ public class PessoaController {
     }
 
     @GetMapping("/pessoa/{id}")
-    public ResponseEntity<Pessoa> GetById(@PathVariable(name = "id") long id) {
-        Optional<Pessoa> pessoa = _pessoaRepository.findById(id);
-        return pessoa
+    public ResponseEntity<Pessoa> GetById(@PathVariable long id) {
+        return _pessoaRepository.findById(id)
             .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -40,10 +39,7 @@ public class PessoaController {
     }
 
     @PutMapping("/pessoa/{id}")
-    public ResponseEntity<Pessoa> Put(
-        @PathVariable(value = "id") long id,
-        @RequestBody Pessoa newPessoa
-    ) {
+    public ResponseEntity<Pessoa> Put(@PathVariable long id, @RequestBody Pessoa newPessoa) {
         Optional<Pessoa> oldPessoa = _pessoaRepository.findById(id);
         if (oldPessoa.isPresent()) {
             Pessoa pessoa = oldPessoa.get();
@@ -56,7 +52,7 @@ public class PessoaController {
     }
 
     @DeleteMapping("/pessoa/{id}")
-    public ResponseEntity<Pessoa> Delete(@PathVariable(name = "id") long id) {
+    public ResponseEntity<Pessoa> Delete(@PathVariable long id) {
         Optional<Pessoa> pessoa = _pessoaRepository.findById(id);
         if (pessoa.isPresent()) {
             _pessoaRepository.delete(pessoa.get());
