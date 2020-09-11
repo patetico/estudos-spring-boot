@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
 import axios from 'axios';
+import PessoaCard from '../components/pessoaCard';
 
 
 export default function Home() {
@@ -12,9 +12,9 @@ export default function Home() {
       .get('http://localhost:8080/pessoas')
       .then(resp => {
         setFoo((
-          <ul>
-            {resp.data.map(p => (<li key={p.id}>{p.nome}</li>))}
-          </ul>
+          <div className="pessoas-wrapper">
+            {resp.data.map(p => (<PessoaCard key={p.id} pessoa={p} />))}
+          </div>
         ));
         setLoading(false);
       })
@@ -29,6 +29,17 @@ export default function Home() {
   return (
     <div className="container">
       {loading ? 'carregando' : foo}
+      <style jsx global>{`
+        .pessoas-wrapper {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        
+        .pessoas-wrapper > * {
+          margin: 5px;
+        }
+      `}</style>
     </div>
   );
 }
