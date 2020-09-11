@@ -2,9 +2,9 @@ import React from 'react';
 
 
 const GENEROS = {
-  MASCULINO: 'MASCULINO',
-  FEMININO: 'FEMININO',
-  OUTRO: 'OUTRO',
+  MASCULINO: 'Masculino',
+  FEMININO: 'Feminino',
+  OUTRO: 'Outro',
 };
 
 const PessoaCard = ({ pessoa }) => {
