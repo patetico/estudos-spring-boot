@@ -43,7 +43,9 @@ public class PessoaController {
         Optional<Pessoa> oldPessoa = _pessoaRepository.findById(id);
         if (oldPessoa.isPresent()) {
             Pessoa pessoa = oldPessoa.get();
-            pessoa.setNome(newPessoa.getNome());
+            if (newPessoa.getNome() != null) pessoa.setNome(newPessoa.getNome());
+            if (newPessoa.getDataNasc() != null) pessoa.setDataNasc(newPessoa.getDataNasc());
+            if (newPessoa.getGenero() != null) pessoa.setGenero(newPessoa.getGenero());
             _pessoaRepository.save(pessoa);
             return new ResponseEntity<>(pessoa, HttpStatus.OK);
         } else {

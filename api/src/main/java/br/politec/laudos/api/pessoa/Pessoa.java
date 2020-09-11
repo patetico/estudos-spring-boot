@@ -1,10 +1,8 @@
 package br.politec.laudos.api.pessoa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
+
 
 @Entity
 public class Pessoa {
@@ -14,6 +12,13 @@ public class Pessoa {
 
     @Column(nullable = false)
     private String nome;
+
+    @Temporal(TemporalType.DATE)
+    private Date dataNasc;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Genero genero;
 
     public long getId() {
         return id;
@@ -30,4 +35,21 @@ public class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(Date dataDeNasc) {
+        this.dataNasc = dataDeNasc;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
 }
